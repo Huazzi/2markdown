@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2markdown - 文档转换平台</title>
+    <!-- 添加favicon -->
+    <link rel="icon" type="image/png" href="/static/img/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/static/img/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/static/img/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="2Markdown" />
+    <link rel="manifest" href="/static/img/favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lywkpmydb/dist/LXGWWenKaiScreen/result.css' />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <!-- 导航栏 -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <i class="bi bi-markdown-fill me-2"></i>2markdown
@@ -31,129 +39,172 @@
         </div>
     </nav>
 
-    <!-- 主内容区 -->
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
-                <h1 class="display-4 mb-4">将各种文档转换为Markdown格式</h1>
-                <p class="lead mb-5">支持PDF、Word、Excel、PowerPoint等常见格式，快速、准确地转换为Markdown格式文件。</p>
+    <!-- 主内容区 - 英雄区 -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h1 class="hero-title display-4">将各种文档转换为Markdown格式</h1>
+                    <p class="hero-subtitle">支持PDF、Word、Excel、PowerPoint等常见格式，快速、准确地转换为Markdown文件</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card shadow-sm">
-                    <div class="card-body p-5">
-                        <div class="text-center mb-4">
-                            <i class="bi bi-cloud-arrow-up display-1 text-primary"></i>
-                        </div>
-                        <form id="upload-form" enctype="multipart/form-data">
-                            <div class="mb-4 text-center">
-                                <label for="file-upload" class="form-label d-block">
-                                    <div class="upload-area p-5 border border-2 border-dashed rounded cursor-pointer">
-                                        <p class="mb-2">拖拽文件到这里上传或</p>
-                                        <button type="button" class="btn btn-primary" id="select-file-btn">选择文件</button>
-                                        <input type="file" id="file-upload" name="file" class="d-none" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx">
-                                    </div>
-                                </label>
-                                <div id="file-info" class="mt-3 d-none">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-file-earmark me-2"></i>
-                                        <span id="filename"></span>
-                                        <button type="button" class="btn btn-sm btn-link text-danger ms-2" id="remove-file">
-                                            <i class="bi bi-x-circle"></i>
-                                        </button>
+    <!-- 上传区域 -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="upload-card card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <i class="bi bi-cloud-arrow-up upload-icon"></i>
+                            </div>
+                            <form id="upload-form" enctype="multipart/form-data">
+                                <div class="mb-4 text-center">
+                                    <label for="file-upload" class="form-label d-block">
+                                        <div class="upload-area">
+                                            <p class="upload-message">拖拽文件到这里上传或</p>
+                                            <button type="button" class="btn btn-primary" id="select-file-btn">
+                                                <i class="bi bi-folder me-2"></i>选择文件
+                                            </button>
+                                            <input type="file" id="file-upload" name="file" class="d-none" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx">
+                                        </div>
+                                    </label>
+                                    <div id="file-info" class="mt-3 d-none">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-file-earmark me-2"></i>
+                                            <span id="filename"></span>
+                                            <button type="button" class="btn btn-sm btn-link text-danger ms-2" id="remove-file">
+                                                <i class="bi bi-x-circle"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary" id="convert-btn" disabled>
+                                        <i class="bi bi-arrow-repeat me-2"></i>转换为Markdown
+                                    </button>
+                                </div>
+                            </form>
+                            
+                            <!-- 处理状态 -->
+                            <div id="processing" class="mt-4 text-center d-none">
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">处理中...</span>
+                                </div>
+                                <p class="mt-3 fs-5">正在处理文件，请稍候...</p>
                             </div>
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg" id="convert-btn" disabled>
-                                    <i class="bi bi-arrow-repeat me-2"></i>转换
-                                </button>
-                            </div>
-                        </form>
-                        
-                        <!-- 处理状态 -->
-                        <div id="processing" class="mt-4 text-center d-none">
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">处理中...</span>
-                            </div>
-                            <p class="mt-2">正在处理文件，请稍候...</p>
+                            
+                            <!-- 错误信息 -->
+                            <div id="error-message" class="alert alert-danger mt-4 d-none"></div>
                         </div>
-                        
-                        <!-- 错误信息 -->
-                        <div id="error-message" class="alert alert-danger mt-4 d-none"></div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- 支持的格式 -->
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-8">
-                <h3 class="text-center mb-4">支持的文件格式</h3>
-                <div class="row text-center">
-                    <div class="col-4 col-md-2 mb-4">
-                        <i class="bi bi-file-earmark-pdf display-5 text-danger"></i>
-                        <p class="mt-2">PDF</p>
-                    </div>
-                    <div class="col-4 col-md-2 mb-4">
-                        <i class="bi bi-file-earmark-word display-5 text-primary"></i>
-                        <p class="mt-2">Word</p>
-                    </div>
-                    <div class="col-4 col-md-2 mb-4">
-                        <i class="bi bi-file-earmark-excel display-5 text-success"></i>
-                        <p class="mt-2">Excel</p>
-                    </div>
-                    <div class="col-4 col-md-2 mb-4">
-                        <i class="bi bi-file-earmark-ppt display-5 text-warning"></i>
-                        <p class="mt-2">PowerPoint</p>
-                    </div>
-                    <div class="col-4 col-md-2 mb-4">
-                        <i class="bi bi-file-earmark-image display-5 text-info"></i>
-                        <p class="mt-2">图片</p>
-                    </div>
-                    <div class="col-4 col-md-2 mb-4">
-                        <i class="bi bi-file-earmark-music display-5 text-secondary"></i>
-                        <p class="mt-2">音频</p>
+    <!-- 支持的格式 -->
+    <section class="feature-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center mb-5">
+                    <h2 class="section-title">支持的文件格式</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-6 col-md-4 col-lg-2 mb-4">
+                            <div class="format-item text-center">
+                                <i class="bi bi-file-earmark-pdf format-icon text-danger"></i>
+                                <p class="format-name">PDF</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-2 mb-4">
+                            <div class="format-item text-center">
+                                <i class="bi bi-file-earmark-word format-icon text-primary"></i>
+                                <p class="format-name">Word</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-2 mb-4">
+                            <div class="format-item text-center">
+                                <i class="bi bi-file-earmark-excel format-icon text-success"></i>
+                                <p class="format-name">Excel</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-2 mb-4">
+                            <div class="format-item text-center">
+                                <i class="bi bi-file-earmark-ppt format-icon text-warning"></i>
+                                <p class="format-name">PowerPoint</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-2 mb-4">
+                            <div class="format-item text-center">
+                                <i class="bi bi-file-earmark-image format-icon text-info"></i>
+                                <p class="format-name">图片</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-2 mb-4">
+                            <div class="format-item text-center">
+                                <i class="bi bi-file-earmark-music format-icon text-secondary"></i>
+                                <p class="format-name">音频</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- 功能特点 -->
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-8">
-                <h3 class="text-center mb-4">为什么选择我们？</h3>
-                <div class="row">
-                    <div class="col-md-4 mb-4">
-                        <div class="text-center">
-                            <i class="bi bi-lightning-charge display-5 text-warning"></i>
-                            <h5 class="mt-3">快速转换</h5>
-                            <p>高效的转换引擎，快速处理您的文档</p>
+    <!-- 功能特点 -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center mb-5">
+                    <h2 class="section-title">为什么选择 2Markdown？</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="feature-item">
+                                <div class="feature-icon feature-speed">
+                                    <i class="bi bi-lightning-charge"></i>
+                                </div>
+                                <h3 class="feature-title">快速转换</h3>
+                                <p class="feature-desc">高效的转换引擎，快速处理您的文档</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="text-center">
-                            <i class="bi bi-shield-check display-5 text-success"></i>
-                            <h5 class="mt-3">安全可靠</h5>
-                            <p>所有文件处理在本地完成，保护您的隐私</p>
+                        <div class="col-md-4 mb-4">
+                            <div class="feature-item">
+                                <div class="feature-icon feature-security">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+                                <h3 class="feature-title">安全可靠</h3>
+                                <p class="feature-desc">所有文件处理在本地完成，保护您的隐私</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="text-center">
-                            <i class="bi bi-gem display-5 text-primary"></i>
-                            <h5 class="mt-3">高质量输出</h5>
-                            <p>保留文档格式，准确转换为Markdown</p>
+                        <div class="col-md-4 mb-4">
+                            <div class="feature-item">
+                                <div class="feature-icon feature-quality">
+                                    <i class="bi bi-gem"></i>
+                                </div>
+                                <h3 class="feature-title">高质量输出</h3>
+                                <p class="feature-desc">保留文档格式，准确转换为Markdown</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- 页脚 -->
-    <footer class="bg-light py-4 mt-5">
+    <footer>
         <div class="container text-center">
             <p class="mb-0">© 2025 2markdown - 基于 <a href="https://github.com/microsoft/markitdown" target="_blank">MarkItDown</a> 开发</p>
         </div>

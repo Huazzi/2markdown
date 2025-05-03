@@ -11,7 +11,7 @@
 
 ## 技术栈
 
-- 前端：HTML、CSS、JavaScript、Vue.js
+- 前端：HTML、CSS、JavaScript
 - 后端：Python、Flask
 - 文档转换：MarkItDown
 
@@ -20,8 +20,8 @@
 1. 克隆仓库
 
 ```bash
-git clone https://github.com/yourusername/toMarkdown.git
-cd toMarkdown
+git clone https://github.com/Huazzi/2markdown.git
+cd tomarkdown
 ```
 
 2. 安装依赖

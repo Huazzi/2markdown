@@ -1,2 +1,59 @@
 2025-05-04 02:21:23,586 INFO: 2markdown启动 [in d:\Code\toMarkDown\app.py:29]
 2025-05-04 02:21:24,835 INFO: 2markdown启动 [in d:\Code\toMarkDown\app.py:29]
+2025-05-04 02:36:10,924 INFO: 处理文件: 张振华-个人贡献度互评表02.xlsx [in d:\Code\toMarkDown\app.py:61]
+2025-05-04 02:36:10,929 INFO: 文件保存到临时位置: C:\Users\0657\AppData\Local\Temp\tmpp5u6_coo.xlsx [in d:\Code\toMarkDown\app.py:68]
+2025-05-04 02:36:11,087 INFO: 开始转换文件: 张振华-个人贡献度互评表02.xlsx [in d:\Code\toMarkDown\app.py:74]
+2025-05-04 02:36:11,100 INFO: 错误处理中删除临时文件: C:\Users\0657\AppData\Local\Temp\tmpp5u6_coo.xlsx [in d:\Code\toMarkDown\app.py:106]
+2025-05-04 02:36:11,101 ERROR: 处理文件时出错: File conversion failed after 1 attempts:
+ - XlsxConverter threw MissingDependencyException with message: XlsxConverter recognized the input as a potential .xlsx file, but the dependencies needed to read .xlsx files have not been installed. To resolve this error, include the optional dependency [xlsx] or [all] when installing MarkItDown. For example:
+
+* pip install markitdown[xlsx]
+* pip install markitdown[all]
+* pip install markitdown[xlsx, ...]
+* etc.
+ [in d:\Code\toMarkDown\app.py:110]
+Traceback (most recent call last):
+  File "d:\Code\toMarkDown\app.py", line 75, in upload_file
+    result = md.convert(temp_path)
+  File "D:\Miniforge3\envs\webapp\Lib\site-packages\markitdown\_markitdown.py", line 260, in convert
+    return self.convert_local(source, stream_info=stream_info, **kwargs)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniforge3\envs\webapp\Lib\site-packages\markitdown\_markitdown.py", line 314, in convert_local
+    return self._convert(file_stream=fh, stream_info_guesses=guesses, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniforge3\envs\webapp\Lib\site-packages\markitdown\_markitdown.py", line 600, in _convert
+    raise FileConversionException(attempts=failed_attempts)
+markitdown._exceptions.FileConversionException: File conversion failed after 1 attempts:
+ - XlsxConverter threw MissingDependencyException with message: XlsxConverter recognized the input as a potential .xlsx file, but the dependencies needed to read .xlsx files have not been installed. To resolve this error, include the optional dependency [xlsx] or [all] when installing MarkItDown. For example:
+
+* pip install markitdown[xlsx]
+* pip install markitdown[all]
+* pip install markitdown[xlsx, ...]
+* etc.
+
+2025-05-04 02:40:56,135 INFO: 2markdown启动 [in d:\Code\toMarkDown\app.py:29]
+2025-05-04 02:40:58,113 INFO: 2markdown启动 [in d:\Code\toMarkDown\app.py:29]
+2025-05-04 02:41:13,913 INFO: 处理文件: 财务预算及决算报告模板.docx [in d:\Code\toMarkDown\app.py:61]
+2025-05-04 02:41:13,918 INFO: 文件保存到临时位置: C:\Users\0657\AppData\Local\Temp\tmpzgpins57.docx [in d:\Code\toMarkDown\app.py:68]
+2025-05-04 02:41:14,093 INFO: 开始转换文件: 财务预算及决算报告模板.docx [in d:\Code\toMarkDown\app.py:74]
+2025-05-04 02:41:14,290 INFO: 文件转换完成: 财务预算及决算报告模板.docx [in d:\Code\toMarkDown\app.py:79]
+2025-05-04 02:41:14,291 INFO: 临时文件已删除: C:\Users\0657\AppData\Local\Temp\tmpzgpins57.docx [in d:\Code\toMarkDown\app.py:83]
+2025-05-04 02:41:14,292 INFO: 发送转换后的文件: md [in d:\Code\toMarkDown\app.py:91]
+2025-05-04 02:42:30,310 INFO: 处理文件: 个人贡献度互评表-张振华.xlsx [in d:\Code\toMarkDown\app.py:61]
+2025-05-04 02:42:30,313 INFO: 文件保存到临时位置: C:\Users\0657\AppData\Local\Temp\tmp77q3d9fg.xlsx [in d:\Code\toMarkDown\app.py:68]
+2025-05-04 02:42:30,352 INFO: 开始转换文件: 个人贡献度互评表-张振华.xlsx [in d:\Code\toMarkDown\app.py:74]
+2025-05-04 02:42:30,397 INFO: 文件转换完成: 个人贡献度互评表-张振华.xlsx [in d:\Code\toMarkDown\app.py:79]
+2025-05-04 02:42:30,398 INFO: 临时文件已删除: C:\Users\0657\AppData\Local\Temp\tmp77q3d9fg.xlsx [in d:\Code\toMarkDown\app.py:83]
+2025-05-04 02:42:30,398 INFO: 发送转换后的文件: -.md [in d:\Code\toMarkDown\app.py:91]
+2025-05-04 02:42:42,827 INFO: 处理文件: 张振华-个人贡献度互评表02.xlsx [in d:\Code\toMarkDown\app.py:61]
+2025-05-04 02:42:42,829 INFO: 文件保存到临时位置: C:\Users\0657\AppData\Local\Temp\tmpx9b4jrlg.xlsx [in d:\Code\toMarkDown\app.py:68]
+2025-05-04 02:42:42,861 INFO: 开始转换文件: 张振华-个人贡献度互评表02.xlsx [in d:\Code\toMarkDown\app.py:74]
+2025-05-04 02:42:42,901 INFO: 文件转换完成: 张振华-个人贡献度互评表02.xlsx [in d:\Code\toMarkDown\app.py:79]
+2025-05-04 02:42:42,903 INFO: 临时文件已删除: C:\Users\0657\AppData\Local\Temp\tmpx9b4jrlg.xlsx [in d:\Code\toMarkDown\app.py:83]
+2025-05-04 02:42:42,903 INFO: 发送转换后的文件: -02.md [in d:\Code\toMarkDown\app.py:91]
+2025-05-04 03:14:08,149 INFO: 2markdown启动 [in d:\Code\toMarkDown\app.py:29]
+2025-05-04 03:14:10,135 INFO: 2markdown启动 [in d:\Code\toMarkDown\app.py:29]
+2025-05-04 03:15:33,327 INFO: 2markdown启动 [in d:\Code\toMarkDown\app.py:29]
+2025-05-04 03:15:35,291 INFO: 2markdown启动 [in d:\Code\toMarkDown\app.py:29]
+2025-05-04 03:16:59,800 INFO: 2markdown启动 [in d:\Code\toMarkDown\app.py:29]
+2025-05-04 03:17:01,805 INFO: 2markdown启动 [in d:\Code\toMarkDown\app.py:29]
