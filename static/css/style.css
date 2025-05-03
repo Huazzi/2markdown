@@ -1,0 +1,43 @@
+/* 全局样式 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* 上传区域样式 */
+.upload-area {
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.upload-area:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+.border-dashed {
+    border-style: dashed !important;
+}
+
+/* 处理中动画 */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* 鼠标样式 */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* 错误消息样式 */
+#error-message {
+    display: none;
+}
+
+/* 拖拽上传高亮样式 */
+.dragover {
+    background-color: rgba(13, 110, 253, 0.1) !important;
+    border-color: #0d6efd !important;
+} 
