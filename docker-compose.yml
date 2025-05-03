@@ -5,9 +5,9 @@ services:
     build: .
     ports:
       - "5000:5000"
-    volumes:
-      - ./uploads:/app/uploads
-      - ./output:/app/output
+    volumes: # 挂载上传目录和输出目录，注意：上传目录和输出目录需要创建在 可写 目录下
+      - /home/hua/2markdown/uploads:/app/uploads
+      - /home/hua/2markdown/output:/app/output
     environment:
       - FLASK_APP=app.py
       - FLASK_ENV=production
